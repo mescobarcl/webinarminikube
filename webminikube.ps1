@@ -37,6 +37,14 @@ Start-Process PowerShell -ArgumentList "minikube tunnel" -WindowStyle Minimized
 kubectl get svc gateway-ext -n kasten-io
 #http://ipsvc/k10/
 
+#Instalación Minio
+helm repo add minio https://operator.min.io/
+helm install --namespace minio-operator --create-namespace --generate-name minio/minio-operator
+kubectl get pods -n minio-operator
+kubectl get secret -n minio-operator
+kubectl describe secret minio-operator-token-prq95 -n minio-operator #el nombre del secret varia, por tanto en el comando anteior copair nombre
+kubectl get svc -n minio-operator
+
 #Pacman
 helm repo add veducate https://saintdle.github.io/helm-charts/
 kubectl create ns pacman
